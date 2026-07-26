@@ -62,5 +62,19 @@ resource "aws_instance" "private" {
   vpc_security_group_ids = [aws_security_group.private.id]
   key_name               = aws_key_pair.this.key_name
 
+
+
+
+  user_data = <<-EOF
+    #!/bin/bash
+    dnf update -y
+    dnf install -y nginx
+    systemctl enable nginx
+    systemctl start nginx
+    echo "<h1>NGINX running on AWS with Terraform</h1>" > /usr/share/nginx/html/index.html
+  EOF
+
   tags = { Name = "${var.project_name}-private" }
-}
+
+  }
+  
