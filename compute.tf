@@ -77,4 +77,3 @@ resource "aws_instance" "private" {
   tags = { Name = "${var.project_name}-private" }
 
   }
-  
