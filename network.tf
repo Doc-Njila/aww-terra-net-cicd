@@ -1,5 +1,5 @@
 # Pick the first available Availability Zone in the chosen region.
-data "aws_availability_zones" "available" {
+data "aws_availability_zones" "us-east-1" {
   state = "available"
 }
 
@@ -28,7 +28,7 @@ resource "aws_internet_gateway" "this" {
 resource "aws_subnet" "public" {
   vpc_id                  = aws_vpc.this.id
   cidr_block              = var.public_subnet_cidr
-  availability_zone       = data.aws_availability_zones.available.names[0]
+  availability_zone       = data.aws_availability_zones.us-east-1.names[0]
   map_public_ip_on_launch = true # instances here get a public IP automatically
 
   tags = { Name = "${var.project_name}-public" }
@@ -37,7 +37,7 @@ resource "aws_subnet" "public" {
 resource "aws_subnet" "private" {
   vpc_id            = aws_vpc.this.id
   cidr_block        = var.private_subnet_cidr
-  availability_zone = data.aws_availability_zones.available.names[0]
+  availability_zone = data.aws_availability_zones.us-east-1.names[0]
 
   tags = { Name = "${var.project_name}-private" }
 }

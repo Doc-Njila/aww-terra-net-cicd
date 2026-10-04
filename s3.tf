@@ -1,6 +1,7 @@
 resource "aws_s3_bucket" "migration" {
-  bucket = "terraform-migration-bucket"
+  bucket = "terraform-migration-bucket-009160073476"
 }
+
 
 resource "aws_s3_bucket_versioning" "migration" {
   bucket = aws_s3_bucket.migration.id
